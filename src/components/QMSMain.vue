@@ -11,18 +11,32 @@
       </div>
     </div>
     <div class="row">
-      <QMSTable />
+      <QMSTable v-bind:list="questionsList"/>
     </div>
   </div>
 </template>
 
 <script>
 import QMSTable from './QMSTable'
+import axios from 'axios'
 
 export default {
   name: 'QMSMain',
   components: {
     QMSTable,
+  },
+  data() {
+    return {
+      questionsList: [],
+    }
+  },
+  created() {
+    axios
+      .get('http://localhost:5000/question')
+      .then(res => {
+        this.questionsList = res.data
+      })
+      .catch(err => console.log(err))
   }
 }
 </script>

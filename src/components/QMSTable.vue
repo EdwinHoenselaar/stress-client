@@ -2,26 +2,20 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">id</th>
+        <th scope="col">question</th>
+        <th scope="col">answer</th>
+        <th scope="col">edit</th>
+        <th scope="col">delete</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
+      <tr v-for="question in list" v-bind:key="question.id">
+        <td>{{question.id}}</td>
+        <td>{{question.question}}</td>
+        <td>{{question.correct_answer}}</td>
+        <td>EDIT</td>
+        <td>DELETE</td>
       </tr>
     </tbody>
   </table>
@@ -30,6 +24,7 @@
 <script>
 export default {
   name: 'QMSTable',
+  props: ['list']
 }
 </script>
 
