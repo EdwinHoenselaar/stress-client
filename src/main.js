@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import QMSMain from './components/QMSMain'
 import QMSNewForm from './components/QMSNewForm'
 import QMSEditForm from './components/QMSEditForm'
+import LandingPage from './components/LandingPage'
+import Quiz from './components/Quiz'
 import VueToastr2 from 'vue-toastr-2'
 import 'vue-toastr-2/dist/vue-toastr-2.min.css'
  
@@ -16,9 +18,10 @@ Vue.use(VueToastr2)
 
 const routes = [
   { path: '/qms', component: QMSMain },
-  { path: '/', component: App },
+  { path: '/', component: LandingPage },
   { path: '/qms/form', component: QMSNewForm },
-  { path: '/qms/:id', component: QMSEditForm }
+  { path: '/qms/:id', component: QMSEditForm },
+  { path: '/quiz', component: Quiz },
 ]
 
 const router = new VueRouter({
