@@ -81,6 +81,7 @@
 export default {
   name: 'QMSForm',
   data() {
+    console.log('DATA FORM: ', this.values)
     return {
       question: '',
       answer_one: '',
@@ -91,6 +92,7 @@ export default {
   },
   props: ['values'],
   created() {
+    console.log('CREATED FORM: ', this.values)
     this.question = this.values.question
     this.answer_one = this.values.answer_one
     this.answer_two = this.values.answer_two

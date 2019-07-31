@@ -45,7 +45,7 @@ export default {
       }
       console.log('onSubmit test', question, answer_one, answer_two, answer_three, correct_answer)
       axios
-        .post('http://localhost:5000/question', {
+        .put(`http://localhost:5000/question/${this.$route.params.id}`, {
           question, 
           answer_one, 
           answer_two, 
@@ -55,11 +55,10 @@ export default {
           })
         .then(res => {
           if (res.status === 200) {
-            this.$toastr.success('Question succesfully added', 'POST request succes')
+            this.$toastr.success('Question succesfully updated', 'PUT request succes')
           } else {
-            this.$toastr.error('There was an error, question is not added to the database', 'POST request error')
+            this.$toastr.error('There was an error, question is not updated in the database', 'PUT request error')
           }
-          console.log('response POST', res)
         })
         .catch(err => console.log(err))
 
@@ -70,6 +69,18 @@ export default {
   },
   components: {
     QMSForm,
+  },
+  created() {
+    axios
+      .get(`http://localhost:5000/question/${this.$route.params.id}`)
+      .then(res => {
+        console.log('response test EDIT created: ', res)
+        this.values.question = res.data.question
+        this.values.answer_one = res.data.answer_one
+        this.values.answer_two = res.data.answer_two
+        this.values.answer_three = res.data.answer_three
+        this.values.correct_answer = res.data.correct_answer
+      })
   }
 }
 </script>

@@ -59,7 +59,6 @@ export default {
           } else {
             this.$toastr.error('There was an error, question is not added to the database', 'POST request error')
           }
-          console.log('response POST', res)
         })
         .catch(err => console.log(err))
 

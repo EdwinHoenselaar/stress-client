@@ -27,7 +27,6 @@ export default {
   props: ['list'],
   methods: {
     editQuestion(id) {
-      console.log('editQuestion test: ', this.target)
       this.$router.push({ path: `/qms/${id}` })
     },
     deleteQuestion(id) {
