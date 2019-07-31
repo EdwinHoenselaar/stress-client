@@ -14,8 +14,8 @@
         <td>{{question.id}}</td>
         <td>{{question.question}}</td>
         <td>{{question.correct_answer}}</td>
-        <td>EDIT</td>
-        <td>DELETE</td>
+        <td @click="editQuestion(question.id, $event)">EDIT</td>
+        <td @click="deleteQuestion">DELETE</td>
       </tr>
     </tbody>
   </table>
@@ -24,7 +24,17 @@
 <script>
 export default {
   name: 'QMSTable',
-  props: ['list']
+  props: ['list'],
+  methods: {
+    editQuestion(id) {
+      console.log('editQuestion test: ', this.target)
+      this.$router.push({ path: `/qms/${id}` })
+    },
+    deleteQuestion(id) {
+      this.$router.push({ path: `/qms/delete/${id}` })
+    }
+
+  }
 }
 </script>
 
