@@ -5,7 +5,7 @@
         <h1 class="title">Stress</h1>
       </div>
       <div class="col-4">
-        <button type="button" class="btn btn-info new">
+        <button type="button" class="btn btn-info new" @click="onClick"> 
           Add new question
         </button>
       </div>
@@ -37,11 +37,16 @@ export default {
         this.questionsList = res.data
       })
       .catch(err => console.log(err))
+  },
+  methods: {
+    onClick() {
+      this.$router.push({ path: `/qms/form` })
+    }
   }
 }
 </script>
 
-<style scoped>
+<style>
   .new {
     margin: 2rem;
   }
