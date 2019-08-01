@@ -12,9 +12,14 @@
       </div>
     </div>
     <div class="col-2">
-      Stress meter here
+      <StressLevel v-bind:percentage="percentage"/>
     </div>
-    <QuizModal />
+    <QuizModal 
+      v-show="showModal" 
+      @close="closeModal" 
+      v-bind:boolean="answerResult" 
+      v-bind:answer="guessedAnswer"
+      v-bind:compliment="compliment"/>
   </div>
 </template>
 
@@ -32,18 +37,36 @@ export default {
       question: '',
       answers: [],
       questionId: '',
-      modalToggle: false
+      guessedAnswer: '',
+      answerResult: false,
+      showModal: false,
+      compliment: '',
+      percentage: 100,
     }
   },
   created() {
     this.getNewQuestion()
   },
   methods: {
+    getRandomCompliment() {
+      axios
+        .get('https://complimentr.com/api')
+        .then(res => {
+          this.compliment = res.data.compliment
+        })
+        .catch(err => console.log(err))
+    },
+    closeModal() {
+      this.getNewQuestion()
+      this.showModal = false
+    },
+    openModal() {
+      this.showModal = true
+    },
     getNewQuestion() {
       axios
         .get(`http://localhost:5000/question/random`)
         .then(res => {
-          console.log('RESPONSE QUIZ CREATED: ', res)
           this.question = res.data.question
           this.answers = []
           this.answers.push(res.data.answer_one)
@@ -57,13 +80,14 @@ export default {
       axios
         .get(`http://localhost:5000/answer/${this.questionId}`)
         .then(res => {
-          console.log('ANSWER RESP: ', res)
+          this.guessedAnswer = answer
+          this.getRandomCompliment()
           if(answer === res.data.correct_answer) {
-            alert('Hooray, correct answer')
-            this.getNewQuestion()
+            this.answerResult = true
           } else {
-            alert("are you stupid?")
+            this.answerResult = false
           }
+          this.openModal()
         })
     }
   }
@@ -79,7 +103,6 @@ export default {
   }
 
   .question {
-    background: white;
     width: 100%;
     height: 30vh;
     text-align: center;
@@ -88,18 +111,24 @@ export default {
   }
 
   .answers {
-    background: lightgreen;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 65vh;
     text-align: center;
+    align-items: center;
   }
 
   .answer {
-    padding-top: 10vh;
+    width: 20vw;
+    border: 2px solid purple;
+    border-radius: 15px;
+    padding: 5vh 0;
   }
 
   .answer:hover {
     transform: scale(1.2);
+    border: 3px solid pink;
     cursor: pointer;
   }
 </style>
