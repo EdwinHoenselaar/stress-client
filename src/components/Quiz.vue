@@ -26,10 +26,12 @@
 <script>
 import axios from 'axios'
 import QuizModal from './QuizModal'
+import StressLevel from './StressLevel'
 
 export default {
   name: 'Quiz',
   components: {
+    StressLevel,
     QuizModal,
   },
   data() {

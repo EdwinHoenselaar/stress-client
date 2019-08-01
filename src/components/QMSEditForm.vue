@@ -13,7 +13,7 @@
         </button>
       </div>
     </div>
-    <QMSForm v-bind:values="values" v-on:onSubmit="onSubmit"/>
+    <QMSForm v-bind:values="{...values}" v-on:onSubmit="onSubmit"/>
   </div>
 </template>
 
@@ -42,6 +42,11 @@ export default {
         || answer_three === '' 
         || correct_answer === '') {
           return alert("please fill in everything")
+      } else if (correct_answer !== answer_one
+        || correct_answer !== answer_two
+        || correct_answer !== answer_three
+      ){
+          return alert("the correct answer does not match any answers, please check the box in front of the correct answer")
       }
       console.log('onSubmit test', question, answer_one, answer_two, answer_three, correct_answer)
       axios
