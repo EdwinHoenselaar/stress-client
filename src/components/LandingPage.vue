@@ -9,10 +9,11 @@
     </div>
     <div class="body-text">
       <h3>Stress is always present in our everyday life.</h3>
+      <br>
       <p>Not everyone deals with stress in the same way. But recent studies show that being succesful and celebrating victories help reduce stress. So to help you reduce your stress, would you like to play a little game?</p>
     </div>
     <div class="btn-wrapper">
-      <button class="btn-play">PLAY</button>
+      <button class="btn-play" @click="onClick">PLAY</button>
     </div>
   </div>
 </template>
