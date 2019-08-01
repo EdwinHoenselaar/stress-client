@@ -80,8 +80,9 @@
 <script>
 export default {
   name: 'QMSForm',
+  props: ['values'],
   data() {
-    console.log('DATA FORM: ', this.values)
+    console.log('DATA FORM: ', this.values, this.question)
     return {
       question: '',
       answer_one: '',
@@ -90,14 +91,23 @@ export default {
       correct_answer: ' ',
     }
   },
-  props: ['values'],
+  watch: {
+    values: function setPropsToState(newVal) {
+      this.question = newVal.question
+      this.answer_one = newVal.answer_one
+      this.answer_two = newVal.answer_two
+      this.answer_three = newVal.answer_three
+      this.correct_answer = newVal.correct_answer
+    }
+  },
   created() {
-    console.log('CREATED FORM: ', this.values)
+    console.log('CREATED FORM: ', this.values, this.values.question)
     this.question = this.values.question
     this.answer_one = this.values.answer_one
     this.answer_two = this.values.answer_two
     this.answer_three = this.values.answer_three
     this.correct_answer = this.values.correct_answer
+    console.log('CREATED FORM 2: ', this.question)
   }
 
 }
