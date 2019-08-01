@@ -86,8 +86,10 @@ export default {
           this.getRandomCompliment()
           if(answer === res.data.correct_answer) {
             this.answerResult = true
+            this.percentage <= 15 ? this.percentage = 5 : this.percentage -= 10
           } else {
             this.answerResult = false
+            this.percentage >= 95 ? this.percentage = 100 : this.percentage += 5
           }
           this.openModal()
         })
