@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="row">
-      <QMSTable v-bind:list="questionsList"/>
+      <QMSTable v-bind:list="questionsList" v-on:deleteQuestion="deleteQuestion"/>
     </div>
   </div>
 </template>
@@ -41,6 +41,25 @@ export default {
   methods: {
     onClick() {
       this.$router.push({ path: `/qms/form` })
+    },
+    deleteQuestion(id) {
+      axios
+        .delete(`http://localhost:5000/question/${id}`)
+        .then(res => {
+          if (res.status === 200) {
+            this.$toastr.success('Question succesfully deleted', 'DELETE request succes')
+          } else {
+            this.$toastr.error('There was an error, question is not deleted in the database', 'DELETE request error')
+          }
+
+          axios
+            .get('http://localhost:5000/question')
+            .then(res => {
+              this.questionsList = res.data
+            })
+            .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
     }
   }
 }

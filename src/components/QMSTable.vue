@@ -14,8 +14,8 @@
         <td>{{question.id}}</td>
         <td>{{question.question}}</td>
         <td>{{question.correct_answer}}</td>
-        <td @click="editQuestion(question.id, $event)">EDIT</td>
-        <td @click="deleteQuestion">DELETE</td>
+        <td @click="editQuestion(question.id, $event)" class="edit">EDIT</td>
+        <td @click="deleteQuestion(question.id, $event)" class="delete">DELETE</td>
       </tr>
     </tbody>
   </table>
@@ -30,7 +30,7 @@ export default {
       this.$router.push({ path: `/qms/${id}` })
     },
     deleteQuestion(id) {
-      this.$router.push({ path: `/qms/delete/${id}` })
+      this.$emit('deleteQuestion', id)
     }
 
   }
@@ -40,5 +40,21 @@ export default {
 <style scoped>
   .table {
     margin: 1rem;
+  }
+
+  .edit {
+    color: blue;
+  }
+  .edit:hover {
+    cursor: pointer;
+    transform: scale(1.1)
+  }
+
+  .delete {
+    color: red;
+  }
+  .delete:hover {
+    cursor: pointer;
+    transform: scale(1.1)
   }
 </style>
